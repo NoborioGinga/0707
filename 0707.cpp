@@ -1,6 +1,6 @@
 ﻿
-
 #include<iostream>
+#include<conio.h>
 
 class GameManager
 {
@@ -10,7 +10,23 @@ private:
 	GameManager() {}
 
 
+
+
+
 public:
+
+	enum Scene
+	{
+
+		Title,
+		Game,
+		Clear,
+
+	};
+
+	Scene GameScene = Title;
+	
+
 	//コピー・代入の禁止
 
 	
@@ -28,8 +44,33 @@ public:
 	}
 
 
-	void StartGame() {
-		std::cout << "ゲームタイトル" << std::endl;
+	void StartGame() 
+	{
+
+		switch (GameScene)
+		{
+			case Title:
+				std::cout << "Game Title" << std::endl;
+				std::cout << "何かキー押してください" << std::endl;
+				(void)_getch();
+				GameScene = Game;
+				return StartGame();
+				break;
+
+			case Game:
+				std::cout << "Game" << std::endl;
+				std::cout << "何かキー押してください" << std::endl;
+				(void)_getch();
+				GameScene = Clear;
+				return StartGame();
+
+			case Clear:
+				std::cout << "Game Clear" << std::endl;
+				std::cout << "何かキー押してください" << std::endl;
+				(void)_getch();
+				GameScene = Title;
+				return StartGame();
+		}
 	}
 
 
